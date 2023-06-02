@@ -1,0 +1,76 @@
+*  *   * DishesItems.js * * * 
+import classes from './DishesItems.module.css'
+const DishItem = (props) => {
+    const price = `₹${props.price.toFixed(2)}`;
+
+    return (
+        <li className={classes.meal}>
+        <div >
+        <h3>{props.name}</h3>
+        <div  className={classes.description}>{props.description}</div>
+        <div className={classes.price}>{price}</div>
+        </div>
+        <div></div>
+        </li>
+    )
+
+}
+export default DishItem;
+
+* *( * * *  Dishesavailability.js * * * * *  
+import Card from '../UI/Card';
+import classes from './AvailableMeals.module.css';
+import DishItem from './DishesItems/DishesItems';
+const DUMMY_MEALS =[
+    {
+        id:"e1",
+        name :"Pizza",
+        description:'Intensely cheesy flavor',
+        price:499
+    },
+    {
+        id:"e1",
+        name :"Wow Momos",
+        description:'Savory veggie filling ,lightly spiced',
+        price:499
+    },
+    {
+        id:"e1",
+        name :"Burger",
+        description:'Spicy delicious favour with french fries ',
+        price:499
+    },
+    {
+        id:"e1",
+        name :"Pasta",
+        description:'Broccoli, garlic and chilli flakes! - Spicy and Rich Flavor',
+        price:499
+    },
+    {
+        id:"e1",
+        name :"Cappuccino",
+        description:'A Cappuccino is like a hug in a mug',
+        price:499
+    },
+]
+const AvailableMeals = () => {
+    const mealsList =DUMMY_MEALS.map((meal )=> <DishItem 
+    key={meal.id}
+    name={meal.name} 
+    description ={meal.description}  
+    price={meal.price}/>);
+
+    return (
+        <section className={classes.meals}>
+        <Card>
+        <ul>
+        {mealsList}
+        </ul>
+        </Card>
+        
+        </section>
+    )
+
+}
+
+export default AvailableMeals;
