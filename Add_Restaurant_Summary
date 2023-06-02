@@ -1,0 +1,111 @@
+* * * Dishes.js * * * 
+import { Fragment } from "react";
+import DishesSummary from "./DishesSummary";
+import AvailableMeals from "./DishesAvailability";
+
+
+
+const Dishes = () =>{
+    return(
+        <Fragment>
+        <DishesSummary/>
+        <AvailableMeals/>
+        </Fragment>
+    )
+
+}
+export default Dishes;
+
+------------------------------------------------------------------------------------* * * * DishesSummary.js * * * * * --------------------------------------------------------------------------
+import React from "react";
+import classes from './DishesSummary.module.css';
+
+const DishesSummary = () =>{
+    return (
+        <section  className={classes.summary}>
+        <h2>Delectable cuisine brought right to your doorstep</h2>
+        <p>Select your desired dish from our extensive array of savoury meals and indulge in an unparalleled dining experience 
+        within the comfort of your own home, relishing a mouth-watering lunch or dinner.
+        </p>
+        
+        <p>
+        Our experienced culinary experts meticulously prepare each meal, utilizing only the finest, high-quality ingredients, cooked just in time to ensure a
+        delectable dining experience.
+        </p>
+        </section>
+        
+    );
+
+}
+export default DishesSummary;
+
+
+------------------------------------------------------------------------------------* * * * DishesAvailability.js * * * * * --------------------------------------------------------------------------
+import classes from './AvailableMeals.module.css';
+const DUMMY_MEALS =[
+    {
+        id:"e1",
+        name :"Pizza",
+        description:'Intensely cheesy flavor',
+        price:499
+    },
+    {
+        id:"e1",
+        name :"Wow Momos",
+        description:'Savory veggie filling ,lightly spiced',
+        price:499
+    },
+    {
+        id:"e1",
+        name :"Burger",
+        description:'Spicy delicious favour with french fries ',
+        price:499
+    },
+    {
+        id:"e1",
+        name :"Pasta",
+        description:'Broccoli, garlic and chilli flakes! - Spicy and Rich Flavor',
+        price:499
+    },
+    {
+        id:"e1",
+        name :"Cappuccino",
+        description:'A Cappuccino is like a hug in a mug',
+        price:499
+    },
+]
+const AvailableMeals = () => {
+    const mealsList =DUMMY_MEALS.map(meal => <li>{meal.name}</li>);
+
+    return (
+        <section className={classes.meals}>
+        <ul>
+        {mealsList}
+        </ul>
+        </section>
+    )
+
+}
+
+export default AvailableMeals;
+
+-------------------------------------------------------------------------------------------------------------App.js-------------------------------------------------------------------
+import { Fragment } from 'react';
+
+import Header from './components/Layout/Header';
+import Dishes from './components/Dishes/dishes';
+
+function App() {
+  return (
+    <Fragment>
+    <Header/>
+    <main>  // In main , we have rendered dishes
+    <Dishes/>
+    </main>
+    </Fragment>
+  );
+}
+
+export default App;
+
+
