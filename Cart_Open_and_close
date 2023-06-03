@@ -1,0 +1,94 @@
+* * * * * * ** *   App.js * * * * * * * * * * *
+
+import { Fragment ,useState } from 'react';
+
+import Header from './components/Layout/Header';
+import Dishes from './components/Dishes/dishes';
+import Cart from './components/Cart/Cart';
+
+function App() {
+  const [cartIsShown , setCartIsShown] =useState(false);
+
+  const showCartHandler = () => {
+    setCartIsShown(true);
+  }
+
+  const hideCartHandler = () =>{
+    setCartIsShown(false);
+  }
+  return (
+    <Fragment>
+    { cartIsShown &&  <Cart onClose ={hideCartHandler}/>}
+    <Header  onShowCart = {showCartHandler}/>
+    <main>
+    <Dishes/>
+    </main>
+    </Fragment>
+  );
+}
+
+export default App;
+
+
+________________________________________________________* * * * * * * Cart.js * * *  * * * * * * ____________________________________________________________________________________
+import classes from './Cart.module.css';
+import Modal from '../UI/Modal';
+
+const Cart = (props) =>{
+    const cartItems =<ul className={classes['cart-items']}>{[ 
+        { id:'c1',
+        name:'Shreya',
+        amount : 2,
+        price:299
+        },].map((item) => <l1>{item.name}</l1>) }</ul>
+
+        return (
+            <Modal onClose={props.onClose}>
+            {cartItems}
+            
+            <div className={classes.total}>
+            <span>Total Amount</span>
+            <span>598</span>
+            </div>
+            <div className={classes.actions}>
+            <button  className={classes['button--alt']} onClick={props.onClose}>Close</button>
+            <button className={classes.button}>Order</button>
+            </div>
+            </Modal>
+
+        );
+
+
+
+};
+export default Cart;
+
+
+________________________________________________________________* * * * * * * * * * * Modal.js *  * * * * * * * * _________________________________________________________________________________
+import { Fragment } from 'react';
+import ReactDOM from 'react-dom';
+import classes from './Modal.module.css';
+
+const Backdrop = (props)=>{
+    return <div className={classes.backdrop} onClick={props.onClose}/>
+}
+
+const ModalOverlay = props =>{
+    return <div className={classes.modal}>
+    <div className={classes.content}>{props.children}</div>
+    </div>
+}
+
+const portalElement = document.getElementById('overlays');
+
+const Modal = (props) =>{
+    return <Fragment>
+   {ReactDOM.createPortal(<Backdrop onClose={props.onClose}/> , portalElement)}
+   {ReactDOM.createPortal(<ModalOverlay>{props.children}</ModalOverlay> , portalElement)}
+
+    </Fragment>
+
+
+
+}
+export default Modal;
